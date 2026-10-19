@@ -65,7 +65,7 @@ Then hard-refresh the browser (`Cmd/Ctrl + Shift + R`).
 ```sh
 cd dsh-theme-qianfu
 npm pack
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.1.tgz
 ```
 
 ## Compatibility
