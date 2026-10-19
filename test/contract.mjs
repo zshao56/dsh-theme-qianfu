@@ -93,6 +93,7 @@ if (styleEl.dataset.plugin !== "dsh-theme-qianfu") throw new Error("style tag is
 if (!styleEl.textContent.includes("@supports selector(:has(*))")) throw new Error("skin has no :has() guard");
 if (!styleEl.textContent.includes("data:image/svg+xml")) throw new Error("skin has no embedded mascot");
 if (!styleEl.textContent.includes("var(--dsw-alias-bg-module-platform)")) throw new Error("skin does not paint the macOS sidebar");
+if (!styleEl.textContent.includes(".dsh-qianfu-quote")) throw new Error("skin has no quote-card styles");
 
 const tokens = registered.tokens;
 const names = Object.keys(tokens);

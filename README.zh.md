@@ -25,6 +25,16 @@
 
 macOS 的原生侧栏默认是透明的（窗口 vibrancy），会露出灰色窗口，和纸色正文割裂。0.2.0 起主题把这块侧栏也铺成纸色，并在底部挂了一只原创的「潜伏鲸」：礼帽、风衣领、红领带、电报和印章红。
 
+鲸鱼上方是一张「站长金句」小卡，点击换一句，选择记在浏览器本地。目前收录 6 句短引用：
+
+> 这天津站啊，就是个筛子，四面透风。
+>
+> 则成啊，你是我的人，明白吗？
+>
+> 人不为己，天诛地灭。
+
+台词版权归剧方所有，这里只做粉丝向的短引用。想关闭：把 `lib/client.js` 里的 `QUOTES` 改成 `[]`，重新打包/安装即可。
+
 卡通形象为原创，不含剧照、演员肖像或剧集 Logo。
 
 ## 安装
@@ -65,8 +75,8 @@ dsh web
 ```sh
 cd dsh-theme-qianfu
 npm pack
-# 得到 dsh-theme-qianfu-0.2.1.tgz
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.1.tgz
+# 得到 dsh-theme-qianfu-0.3.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.3.0.tgz
 ```
 
 ## 兼容性

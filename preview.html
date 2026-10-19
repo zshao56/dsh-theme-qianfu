@@ -60,6 +60,26 @@
 		background: var(--dsw-specific-sidebar-fill);
 		border-right: 1px solid var(--dsw-alias-border-l2);
 	}
+	.quote {
+		position: absolute; left: 12px; right: 12px; bottom: 206px;
+		box-sizing: border-box; margin: 0; padding: 10px 12px 9px;
+		border: 1px solid var(--dsw-alias-border-l2);
+		border-left: 2px solid var(--dsw-alias-state-business-primary);
+		border-radius: 8px;
+		background: var(--dsw-alias-bg-layer-1);
+		color: var(--dsw-alias-label-primary);
+		font: inherit; text-align: left; cursor: pointer;
+		box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+	}
+	.quote blockquote {
+		margin: 0;
+		font-family: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+		font-size: 12px; line-height: 1.7; letter-spacing: .01em;
+	}
+	.quote figcaption {
+		margin-top: 6px; font-size: 10px; letter-spacing: .08em;
+		color: var(--dsw-alias-label-tertiary); text-align: right;
+	}
 	.poster {
 		position: absolute; left: 50%; bottom: 44px;
 		width: 138px; height: auto;
@@ -227,6 +247,10 @@
 						<div class="nav-item"><span class="dot"></span>任务</div>
 						<div class="nav-item"><span class="dot"></span>设置</div>
 					</nav>
+					<div class="quote" role="button" tabindex="0">
+						<blockquote>“这天津站啊，就是个筛子，四面透风。”</blockquote>
+						<figcaption>吴站长 · 《潜伏》</figcaption>
+					</div>
 					<img class="poster" src="./assets/qianfu-spy.svg" alt="">
 					<div class="side-foot"><span>电台</span><b>静默</b></div>
 				</aside>
@@ -278,6 +302,10 @@
 						<div class="nav-item"><span class="dot"></span>任务</div>
 						<div class="nav-item"><span class="dot"></span>设置</div>
 					</nav>
+					<div class="quote" role="button" tabindex="0">
+						<blockquote>“人不为己，天诛地灭。”</blockquote>
+						<figcaption>吴站长 · 《潜伏》</figcaption>
+					</div>
 					<img class="poster" src="./assets/qianfu-spy.svg" alt="">
 					<div class="side-foot"><span>频率</span><b>7.850</b></div>
 				</aside>

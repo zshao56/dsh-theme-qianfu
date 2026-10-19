@@ -25,6 +25,14 @@ The plugin does not replace the built-in light/dark themes. It stacks one **alia
 
 On macOS the native sidebar is transparent (window vibrancy), so it shows the grey window and clashes with the paper content. Since 0.2.0 the theme paints that sidebar with the same paper colour and hangs an original "lurk whale" mascot at the bottom: fedora, trench collar, red tie, telegram and a seal-red stamp.
 
+Above the mascot is a small "station chief quote" card. Click to cycle; the choice is remembered per browser. Six short lines are included.
+
+> The Tianjin station is a sieve — it leaks from all four sides.
+>
+> Zecheng, you are my man. Understand?
+
+The dialogue remains the property of the show's rights holders; this is a short fan quotation. To turn it off, set `QUOTES` to `[]` in `lib/client.js` and reinstall.
+
 The mascot is original artwork — no stills, actor likenesses or show logos.
 
 ## Install
@@ -65,7 +73,7 @@ Then hard-refresh the browser (`Cmd/Ctrl + Shift + R`).
 ```sh
 cd dsh-theme-qianfu
 npm pack
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.1.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.3.0.tgz
 ```
 
 ## Compatibility
