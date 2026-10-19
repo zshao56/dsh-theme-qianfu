@@ -25,7 +25,7 @@ The plugin does not replace the built-in light/dark themes. It stacks one **alia
 
 On macOS the native sidebar is transparent (window vibrancy), so it shows the grey window and clashes with the paper content. Since 0.2.0 the theme paints that sidebar with the same paper colour and hangs an original "lurk whale" mascot at the bottom: fedora, trench collar, red tie, telegram and a seal-red stamp.
 
-Above the mascot is a small "station chief quote" card. Click to cycle; the choice is remembered per browser. Six short lines are included.
+Above the mascot is a small "station chief quote" card. It auto-advances every five minutes, and a click moves to the next line immediately and resets the timer. The choice is remembered per browser. Nine short lines are included.
 
 > The Tianjin station is a sieve — it leaks from all four sides.
 >
@@ -73,7 +73,7 @@ Then hard-refresh the browser (`Cmd/Ctrl + Shift + R`).
 ```sh
 cd dsh-theme-qianfu
 npm pack
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.3.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.4.0.tgz
 ```
 
 ## Compatibility
