@@ -21,6 +21,12 @@ The plugin does not replace the built-in light/dark themes. It stacks one **alia
 - font sizes, font families and terminal settings are untouched;
 - disabling the plugin disposes the layer — no CSS leftovers, no profile patch to clean up.
 
+## Sidebar & mascot
+
+On macOS the native sidebar is transparent (window vibrancy), so it shows the grey window and clashes with the paper content. Since 0.2.0 the theme paints that sidebar with the same paper colour and hangs an original "lurk whale" mascot at the bottom: fedora, trench collar, red tie, telegram and a seal-red stamp.
+
+The mascot is original artwork — no stills, actor likenesses or show logos.
+
 ## Install
 
 ### DSH Desktop (recommended)
@@ -59,7 +65,7 @@ Then hard-refresh the browser (`Cmd/Ctrl + Shift + R`).
 ```sh
 cd dsh-theme-qianfu
 npm pack
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.1.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.0.tgz
 ```
 
 ## Compatibility

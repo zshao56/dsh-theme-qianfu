@@ -13,11 +13,30 @@ import vm from "node:vm";
 const source = fs.readFileSync(new URL("../lib/client.js", import.meta.url), "utf8");
 
 let loaded;
+let styleRemoved = 0;
+const styleEl = {
+	dataset: {},
+	textContent: "",
+	remove() {
+		styleRemoved += 1;
+	}
+};
+const appended = [];
 const sandbox = {
 	window: {
 		__ModuleLoader__: {
 			load(definition) {
 				loaded = definition;
+			}
+		}
+	},
+	document: {
+		createElement() {
+			return styleEl;
+		},
+		head: {
+			appendChild(element) {
+				appended.push(element);
 			}
 		}
 	},
@@ -66,6 +85,14 @@ if (!registered) throw new Error("apply() did not call ctx.theme.overrideTokens"
 if (registered.source !== "dsh-theme-qianfu") throw new Error("override source must be the package id");
 if (typeof effectLabel !== "string" || effectLabel.length === 0) throw new Error("effect label missing");
 if (typeof registered.tokens !== "object" || registered.tokens === null) throw new Error("tokens missing");
+
+/* ---------- sidebar skin ---------- */
+
+if (appended.length !== 1) throw new Error(`expected one injected style tag, got ${appended.length}`);
+if (styleEl.dataset.plugin !== "dsh-theme-qianfu") throw new Error("style tag is not attributed to the plugin");
+if (!styleEl.textContent.includes("@supports selector(:has(*))")) throw new Error("skin has no :has() guard");
+if (!styleEl.textContent.includes("data:image/svg+xml")) throw new Error("skin has no embedded mascot");
+if (!styleEl.textContent.includes("var(--dsw-alias-bg-module-platform)")) throw new Error("skin does not paint the macOS sidebar");
 
 const tokens = registered.tokens;
 const names = Object.keys(tokens);
@@ -142,6 +169,7 @@ if (typeof effectDisposer !== "function") {
 }
 effectDisposer();
 if (disposed !== 1) throw new Error("the override layer was not disposed exactly once");
+if (styleRemoved !== 1) throw new Error("the injected skin style was not removed exactly once");
 
 if (failures.length > 0) {
 	console.error("\nContrast failures:\n" + failures.map((line) => `  - ${line}`).join("\n"));

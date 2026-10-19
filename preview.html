@@ -55,9 +55,17 @@
 
 	/* ── sidebar ─────────────────────────────────────────────────────── */
 	.side {
+		position: relative;
 		display: flex; flex-direction: column;
 		background: var(--dsw-specific-sidebar-fill);
 		border-right: 1px solid var(--dsw-alias-border-l2);
+	}
+	.poster {
+		position: absolute; left: 50%; bottom: 44px;
+		width: 138px; height: auto;
+		transform: translateX(-50%);
+		opacity: .92; pointer-events: none;
+		filter: drop-shadow(0 6px 14px rgba(34, 30, 24, .10));
 	}
 	.brand {
 		display: flex; align-items: center; gap: 10px;
@@ -219,6 +227,7 @@
 						<div class="nav-item"><span class="dot"></span>任务</div>
 						<div class="nav-item"><span class="dot"></span>设置</div>
 					</nav>
+					<img class="poster" src="./assets/qianfu-spy.svg" alt="">
 					<div class="side-foot"><span>电台</span><b>静默</b></div>
 				</aside>
 				<div class="main">
@@ -269,6 +278,7 @@
 						<div class="nav-item"><span class="dot"></span>任务</div>
 						<div class="nav-item"><span class="dot"></span>设置</div>
 					</nav>
+					<img class="poster" src="./assets/qianfu-spy.svg" alt="">
 					<div class="side-foot"><span>频率</span><b>7.850</b></div>
 				</aside>
 				<div class="main">

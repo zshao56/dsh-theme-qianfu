@@ -21,6 +21,12 @@
 - 字号、字体、终端字体等设置完全不受影响；
 - 卸载或禁用插件时，这层调色板随插件一起移除，不会留下 CSS 或 profile 补丁。
 
+## 侧栏与吉祥物
+
+macOS 的原生侧栏默认是透明的（窗口 vibrancy），会露出灰色窗口，和纸色正文割裂。0.2.0 起主题把这块侧栏也铺成纸色，并在底部挂了一只原创的「潜伏鲸」：礼帽、风衣领、红领带、电报和印章红。
+
+卡通形象为原创，不含剧照、演员肖像或剧集 Logo。
+
 ## 安装
 
 ### DSH Desktop（推荐）
@@ -59,8 +65,8 @@ dsh web
 ```sh
 cd dsh-theme-qianfu
 npm pack
-# 得到 dsh-theme-qianfu-0.1.0.tgz
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.1.0.tgz
+# 得到 dsh-theme-qianfu-0.2.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.2.0.tgz
 ```
 
 ## 兼容性
