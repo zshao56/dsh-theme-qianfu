@@ -1,0 +1,6 @@
+# dsh bundle patch: mount the client row into the profile's loader stack.
+# Installed with `dsh plugin --profile <name> add <this package>`, the CLI
+# reconciles this declaration with the profile's bundle stack.
+- insert:
+    - id: dsh-theme-qianfu
+      name: 'dsh-theme-qianfu'

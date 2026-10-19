@@ -1,0 +1,57 @@
+{
+  "name": "dsh-theme-qianfu",
+  "version": "0.1.0",
+  "description": "潜伏 QIANFU — a DeepSeek Harness web theme inspired by the TV drama Lurk (2009): aged paper, ink green, brass and seal red, with paired light and dark palettes. Unaffiliated fan work.",
+  "type": "module",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "preview.html",
+    "preview.png"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "theme",
+    "qianfu",
+    "lurk",
+    "spy",
+    "noir",
+    "chinese"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zshao56/dsh-theme-qianfu.git"
+  },
+  "homepage": "https://github.com/zshao56/dsh-theme-qianfu#readme",
+  "bugs": {
+    "url": "https://github.com/zshao56/dsh-theme-qianfu/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "scripts": {
+    "test": "node test/contract.mjs"
+  }
+}

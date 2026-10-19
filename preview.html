@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>潜伏 QIANFU — preview</title>
+<style>
+	:root {
+		color-scheme: dark;
+		--page-bg: #121416;
+		--page-fg: #e8e2d6;
+		--page-muted: #9a9384;
+	}
+	* { box-sizing: border-box; }
+	html, body { margin: 0; min-height: 100%; }
+	body {
+		background:
+			radial-gradient(1200px 500px at 15% -10%, rgba(127, 160, 140, .10), transparent 60%),
+			radial-gradient(900px 500px at 90% 110%, rgba(194, 161, 90, .08), transparent 65%),
+			var(--page-bg);
+		color: var(--page-fg);
+		font-family: ui-sans-serif, -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+		padding: 34px 34px 40px;
+	}
+	.page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin: 0 auto 26px; max-width: 1500px; }
+	.page-head h1 {
+		margin: 0;
+		font-family: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+		font-size: 34px;
+		font-weight: 600;
+		letter-spacing: .12em;
+	}
+	.page-head h1 span { color: #c2a15a; letter-spacing: .26em; font-size: 18px; margin-left: 14px; }
+	.page-head p { margin: 8px 0 0; color: var(--page-muted); font-size: 13px; letter-spacing: .04em; }
+	.page-head .note { max-width: 420px; text-align: right; font-size: 12px; line-height: 1.7; color: var(--page-muted); }
+	.stage { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1500px; margin: 0 auto; }
+	.slot { min-width: 0; }
+	.slot-label {
+		display: flex; align-items: baseline; gap: 10px; margin: 0 2px 10px;
+		font-size: 12px; letter-spacing: .16em; color: var(--page-muted); text-transform: uppercase;
+	}
+	.slot-label b { color: var(--page-fg); font-size: 13px; letter-spacing: .08em; }
+	.panel {
+		position: relative;
+		height: 520px;
+		display: grid;
+		grid-template-columns: 182px minmax(0, 1fr);
+		overflow: hidden;
+		border-radius: 14px;
+		border: 1px solid var(--dsw-alias-border-l2);
+		background: var(--dsw-alias-bg-base);
+		color: var(--dsw-alias-label-primary);
+		box-shadow: 0 30px 70px rgba(0, 0, 0, .45);
+	}
+
+	/* ── sidebar ─────────────────────────────────────────────────────── */
+	.side {
+		display: flex; flex-direction: column;
+		background: var(--dsw-specific-sidebar-fill);
+		border-right: 1px solid var(--dsw-alias-border-l2);
+	}
+	.brand {
+		display: flex; align-items: center; gap: 10px;
+		padding: 18px 16px 16px;
+		border-bottom: 1px solid var(--dsw-alias-border-l1);
+	}
+	.brand-mark {
+		width: 30px; height: 30px; flex: none;
+		display: grid; place-items: center;
+		border: 1.5px solid var(--dsw-alias-state-error-primary);
+		color: var(--dsw-alias-state-error-primary);
+		font-family: "Songti SC", "STSong", serif;
+		font-size: 17px; line-height: 1;
+		border-radius: 4px;
+		transform: rotate(-4deg);
+	}
+	.brand-name { font-size: 13px; font-weight: 650; letter-spacing: .16em; }
+	.brand-sub { font-size: 10px; letter-spacing: .22em; color: var(--dsw-alias-label-tertiary); margin-top: 2px; }
+	.nav { padding: 10px 8px; display: flex; flex-direction: column; gap: 2px; }
+	.nav-item {
+		display: flex; align-items: center; gap: 9px;
+		padding: 8px 10px; border-radius: 7px;
+		font-size: 12.5px; color: var(--dsw-alias-label-secondary);
+		border-left: 2px solid transparent;
+	}
+	.nav-item .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .55; }
+	.nav-item.active {
+		background: var(--dsw-specific-sidebar-nav-item-active);
+		border-left-color: var(--dsw-specific-sidebar-nav-item-active-accent);
+		color: var(--dsw-alias-label-primary);
+	}
+	.nav-item.active .dot { background: var(--dsw-alias-brand-primary); opacity: 1; }
+	.side-foot { margin-top: auto; padding: 12px 14px; border-top: 1px solid var(--dsw-alias-border-l1); font-size: 11px; color: var(--dsw-alias-label-tertiary); display: flex; justify-content: space-between; }
+	.side-foot b { color: var(--dsw-alias-label-secondary); font-weight: 600; }
+
+	/* ── main ────────────────────────────────────────────────────────── */
+	.main { display: flex; flex-direction: column; min-width: 0; }
+	.topbar {
+		height: 48px; flex: none;
+		display: flex; align-items: center; gap: 10px;
+		padding: 0 16px;
+		border-bottom: 1px solid var(--dsw-alias-border-l1);
+	}
+	.crumb { font-size: 13px; font-weight: 600; }
+	.crumb span { color: var(--dsw-alias-label-tertiary); font-weight: 400; margin-left: 8px; }
+	.badge {
+		margin-left: auto;
+		font-size: 10.5px; letter-spacing: .04em;
+		padding: 3px 8px; border-radius: 999px;
+		background: var(--dsw-alias-state-success-tertiary);
+		color: var(--dsw-alias-state-success-primary);
+		border: 1px solid var(--dsw-alias-border-l1);
+	}
+	.chat { flex: 1; min-height: 0; padding: 16px 18px 8px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+	.msg { max-width: 88%; font-size: 13px; line-height: 1.65; }
+	.msg.user {
+		align-self: flex-end;
+		background: var(--dsw-specific-bubble);
+		border: 1px solid var(--dsw-alias-border-l1);
+		border-radius: 12px 12px 4px 12px;
+		padding: 10px 13px;
+	}
+	.msg.assistant { align-self: flex-start; color: var(--dsw-alias-label-primary); }
+	.msg.assistant .who { font-size: 10.5px; letter-spacing: .14em; color: var(--dsw-alias-brand-primary); margin-bottom: 4px; }
+	.msg .dim { color: var(--dsw-alias-label-secondary); }
+	.tool {
+		align-self: flex-start; width: 82%;
+		background: var(--dsw-alias-bg-layer-1);
+		border: 1px solid var(--dsw-alias-border-l2);
+		border-radius: 9px;
+		overflow: hidden;
+	}
+	.tool-head { display: flex; align-items: center; gap: 8px; padding: 8px 11px; font-size: 11.5px; color: var(--dsw-alias-label-secondary); border-bottom: 1px solid var(--dsw-alias-border-l1); }
+	.tool-head b { color: var(--dsw-alias-label-primary); font-weight: 600; }
+	.tool-head .ok { margin-left: auto; color: var(--dsw-alias-state-success-primary); font-size: 10.5px; }
+	.code {
+		margin: 0; padding: 10px 12px;
+		background: var(--dsw-alias-markdown-code-block);
+		color: var(--dsw-alias-label-secondary);
+		font-family: "SF Mono", Menlo, Consolas, monospace;
+		font-size: 11.5px; line-height: 1.7;
+		white-space: pre; overflow: hidden;
+	}
+	.code .k { color: var(--shiki-token-keyword); }
+	.code .s { color: var(--shiki-token-string); }
+	.code .c { color: var(--shiki-token-comment); }
+	.code .f { color: var(--shiki-token-function); }
+	.code .n { color: var(--shiki-token-constant); }
+	.meta { display: flex; gap: 8px; align-items: center; margin-top: 2px; font-size: 10.5px; color: var(--dsw-alias-label-tertiary); }
+	.chip { border: 1px solid var(--dsw-alias-border-l2); border-radius: 999px; padding: 2px 8px; color: var(--dsw-alias-label-secondary); background: var(--dsw-alias-bg-layer-1); }
+	.chip.warn { color: var(--dsw-alias-state-warn-label); background: var(--dsw-alias-state-warn-tertiary); border-color: transparent; }
+
+	.composer {
+		flex: none; margin: 0 14px 14px;
+		display: flex; align-items: center; gap: 10px;
+		background: var(--dsw-specific-input-major);
+		border: 1px solid var(--dsw-alias-border-l2);
+		border-radius: 11px;
+		padding: 9px 10px 9px 14px;
+	}
+	.composer .field { flex: 1; min-width: 0; font-size: 12.5px; color: var(--dsw-alias-label-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.composer .kbd { font-size: 10px; color: var(--dsw-alias-label-tertiary); border: 1px solid var(--dsw-alias-border-l2); border-radius: 5px; padding: 2px 6px; }
+	.send {
+		flex: none; border: 0; border-radius: 7px;
+		background: var(--dsw-alias-button-primary-fill);
+		color: var(--dsw-alias-label-primary-foreground);
+		font: inherit; font-size: 12px; font-weight: 600;
+		padding: 7px 14px;
+	}
+	.seal {
+		position: absolute; right: 18px; bottom: 74px;
+		width: 54px; height: 54px;
+		display: grid; place-items: center;
+		border: 2px solid var(--dsw-alias-state-error-primary);
+		color: var(--dsw-alias-state-error-primary);
+		border-radius: 6px;
+		font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+		font-size: 28px; line-height: 1;
+		opacity: .7;
+		transform: rotate(-9deg);
+		pointer-events: none;
+	}
+	.swatches { display: flex; gap: 6px; margin: 10px 2px 0; }
+	.swatch { flex: 1; height: 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); }
+	@media (max-width: 1180px) {
+		.stage { grid-template-columns: 1fr; }
+		.page-head { flex-direction: column; align-items: flex-start; }
+		.page-head .note { text-align: left; }
+	}
+</style>
+</head>
+<body>
+	<header class="page-head">
+		<div>
+			<h1>潜伏 <span>QIANFU</span></h1>
+			<p>电视剧《潜伏》主题 · 旧纸档案 / 暗夜电台</p>
+		</div>
+		<div class="note">
+			同一份 token，跟随 DSH 的浅色 / 深色设置切换。<br>
+			仅覆盖颜色，不改布局、字号、字体与动效。非官方粉丝作品。
+		</div>
+	</header>
+
+	<div class="stage">
+		<div class="slot">
+			<div class="slot-label"><b>旧纸档案</b> · LIGHT</div>
+			<div class="panel" id="light">
+				<aside class="side">
+					<div class="brand">
+						<div class="brand-mark">潜</div>
+						<div>
+							<div class="brand-name">QIANFU</div>
+							<div class="brand-sub">潜伏 · 档案室</div>
+						</div>
+					</div>
+					<nav class="nav">
+						<div class="nav-item active"><span class="dot"></span>会话</div>
+						<div class="nav-item"><span class="dot"></span>文件</div>
+						<div class="nav-item"><span class="dot"></span>任务</div>
+						<div class="nav-item"><span class="dot"></span>设置</div>
+					</nav>
+					<div class="side-foot"><span>电台</span><b>静默</b></div>
+				</aside>
+				<div class="main">
+					<div class="topbar">
+						<div class="crumb">default-workspace <span>/ 行动组</span></div>
+						<div class="badge">行动中</div>
+					</div>
+					<div class="chat">
+						<div class="msg user">今晚十点，把名单送到老地方。别走正门。</div>
+						<div class="msg assistant">
+							<div class="who">潜伏</div>
+							收到。先核对名单与交接点，再给出两条撤离路线；<span class="dim">正门与后巷都不可用。</span>
+						</div>
+						<div class="tool">
+							<div class="tool-head"><b>README.md</b><span>读取</span><span class="ok">完成</span></div>
+							<pre class="code"><span class="c"># 交接记录</span>
+<span class="k">route</span> = <span class="s">"侧门 → 钟楼 → 码头"</span>
+<span class="k">contact</span> = <span class="f">verify</span>(<span class="n">"老地方"</span>)
+<span class="c"># 21:40 前完成第一次呼叫</span></pre>
+						</div>
+						<div class="meta"><span class="chip">git · clean</span><span class="chip warn">22:00 宵禁</span><span>刚刚</span></div>
+					</div>
+					<div class="composer">
+						<div class="field">输入指令，或粘贴电报原文…</div>
+						<span class="kbd">⌘ K</span>
+						<button class="send">发送</button>
+					</div>
+					<div class="seal">潜</div>
+				</div>
+			</div>
+			<div class="swatches" data-mode="light"></div>
+		</div>
+
+		<div class="slot">
+			<div class="slot-label"><b>暗夜电台</b> · DARK</div>
+			<div class="panel" id="dark">
+				<aside class="side">
+					<div class="brand">
+						<div class="brand-mark">潜</div>
+						<div>
+							<div class="brand-name">QIANFU</div>
+							<div class="brand-sub">潜伏 · 电台室</div>
+						</div>
+					</div>
+					<nav class="nav">
+						<div class="nav-item active"><span class="dot"></span>会话</div>
+						<div class="nav-item"><span class="dot"></span>文件</div>
+						<div class="nav-item"><span class="dot"></span>任务</div>
+						<div class="nav-item"><span class="dot"></span>设置</div>
+					</nav>
+					<div class="side-foot"><span>频率</span><b>7.850</b></div>
+				</aside>
+				<div class="main">
+					<div class="topbar">
+						<div class="crumb">default-workspace <span>/ 行动组</span></div>
+						<div class="badge">行动中</div>
+					</div>
+					<div class="chat">
+						<div class="msg user">今晚十点，把名单送到老地方。别走正门。</div>
+						<div class="msg assistant">
+							<div class="who">潜伏</div>
+							收到。先核对名单与交接点，再给出两条撤离路线；<span class="dim">正门与后巷都不可用。</span>
+						</div>
+						<div class="tool">
+							<div class="tool-head"><b>intercept.log</b><span>监听</span><span class="ok">已完成</span></div>
+							<pre class="code"><span class="c"># 21:37 截获</span>
+<span class="k">CALL</span> <span class="s">"夜莺"</span> → <span class="n">7.850 MHz</span>
+<span class="f">decode</span>(<span class="s">"名单已转移"</span>)
+<span class="c"># 信号源：钟楼东侧</span></pre>
+						</div>
+						<div class="meta"><span class="chip">信号 · 良好</span><span class="chip warn">宵禁 22:00</span><span>刚刚</span></div>
+					</div>
+					<div class="composer">
+						<div class="field">输入指令，或粘贴电报原文…</div>
+						<span class="kbd">⌘ K</span>
+						<button class="send">发送</button>
+					</div>
+					<div class="seal">潜</div>
+				</div>
+			</div>
+			<div class="swatches" data-mode="dark"></div>
+		</div>
+	</div>
+
+	<script>
+		window.__ModuleLoader__ = { load(definition) { window.__qianfuTheme = definition; } };
+	</script>
+	<script src="./lib/client.js"></script>
+	<script>
+		(() => {
+			const definition = window.__qianfuTheme;
+			if (!definition) return;
+			const mod = definition.factory(() => { throw new Error("preview does not load browser modules"); });
+			let tokens;
+			mod.apply({
+				theme: {
+					overrideTokens(_source, value) {
+						tokens = value;
+						return () => {};
+					}
+				},
+				effect(fn) { return fn(); }
+			});
+			if (!tokens) return;
+
+			const paint = (id, mode) => {
+				const el = document.getElementById(id);
+				for (const [name, pair] of Object.entries(tokens)) el.style.setProperty(name, pair[mode]);
+				const row = document.querySelector(`.swatches[data-mode="${mode}"]`);
+				if (!row) return;
+				const picks = [
+					["--dsw-alias-bg-base", "bg"],
+					["--dsw-alias-brand-primary", "brand"],
+					["--dsw-alias-state-business-primary", "brass"],
+					["--dsw-alias-state-error-primary", "seal"],
+					["--dsw-alias-state-success-primary", "green"]
+				];
+				for (const [token, label] of picks) {
+					const swatch = document.createElement("div");
+					swatch.className = "swatch";
+					swatch.title = `${label} · ${tokens[token][mode]}`;
+					swatch.style.background = tokens[token][mode];
+					row.appendChild(swatch);
+				}
+			};
+
+			paint("light", "light");
+			paint("dark", "dark");
+		})();
+	</script>
+</body>
+</html>
