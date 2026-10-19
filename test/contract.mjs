@@ -91,7 +91,8 @@ if (typeof registered.tokens !== "object" || registered.tokens === null) throw n
 if (appended.length !== 1) throw new Error(`expected one injected style tag, got ${appended.length}`);
 if (styleEl.dataset.plugin !== "dsh-theme-qianfu") throw new Error("style tag is not attributed to the plugin");
 if (!styleEl.textContent.includes("@supports selector(:has(*))")) throw new Error("skin has no :has() guard");
-if (!styleEl.textContent.includes("data:image/svg+xml")) throw new Error("skin has no embedded mascot");
+if (!source.includes("data:image/svg+xml;charset=utf-8")) throw new Error("client has no embedded mascot");
+if (!styleEl.textContent.includes(".dsh-qianfu-mascot")) throw new Error("skin has no mascot styles");
 if (!styleEl.textContent.includes("var(--dsw-alias-bg-module-platform)")) throw new Error("skin does not paint the macOS sidebar");
 if (!styleEl.textContent.includes(".dsh-qianfu-quote")) throw new Error("skin has no quote-card styles");
 

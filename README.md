@@ -31,6 +31,8 @@ Above the mascot is a small "station chief quote" card. It auto-advances every f
 >
 > Zecheng, you are my man. Understand?
 
+The quote card and mascot now sit in the sidebar's normal flex flow, so the workspace list shrinks and scrolls above them instead of being covered. On short windows the mascot hides and the quote stays.
+
 The dialogue remains the property of the show's rights holders; this is a short fan quotation. To turn it off, set `QUOTES` to `[]` in `lib/client.js` and reinstall.
 
 The mascot is original artwork — no stills, actor likenesses or show logos.
@@ -73,7 +75,7 @@ Then hard-refresh the browser (`Cmd/Ctrl + Shift + R`).
 ```sh
 cd dsh-theme-qianfu
 npm pack
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.4.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.5.0.tgz
 ```
 
 ## Compatibility

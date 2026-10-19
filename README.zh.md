@@ -33,6 +33,8 @@ macOS 的原生侧栏默认是透明的（窗口 vibrancy），会露出灰色�
 >
 > 人不为己，天诛地灭。
 
+金句卡和鲸鱼现在是侧栏的**正常布局子项**，不再是浮层：工作区列表会在它们上方收缩并可滚动，不会再互相遮挡。窗口很矮时鲸鱼会自动隐藏，只保留金句。
+
 台词版权归剧方所有，这里只做粉丝向的短引用。想关闭：把 `lib/client.js` 里的 `QUOTES` 改成 `[]`，重新打包/安装即可。
 
 卡通形象为原创，不含剧照、演员肖像或剧集 Logo。
@@ -75,8 +77,8 @@ dsh web
 ```sh
 cd dsh-theme-qianfu
 npm pack
-# 得到 dsh-theme-qianfu-0.4.0.tgz
-dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.4.0.tgz
+# 得到 dsh-theme-qianfu-0.5.0.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-theme-qianfu-0.5.0.tgz
 ```
 
 ## 兼容性
